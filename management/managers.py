@@ -42,7 +42,8 @@ class StudentManager(models.Manager):
         :return:
         """
         try:
-            student=Student.objects.create(name=name, usn=usn, email=email, college_class=CollegeClass(name=college_class))
+            student = Student.objects.create(name=name, usn=usn, email=email,
+                                             college_class=CollegeClass(name=college_class))
             student.save()
             return student
         except IntegrityError:

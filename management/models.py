@@ -2,6 +2,7 @@
 This module contains all the models required for management app
 """
 from django.db import models
+import datetime
 
 
 # Create your models here.
@@ -12,6 +13,7 @@ class CollegeClass(models.Model):
     Model representing class entity
     """
     name = models.CharField(max_length=240)
+    department = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
@@ -22,7 +24,7 @@ class Student(models.Model):
     Model representing student entity
     """
     name = models.CharField(max_length=240)
-    usn = models.CharField(max_length=240)
+    usn = models.CharField(max_length=240, primary_key=True)
     email = models.EmailField()
     class_name = models.ForeignKey(CollegeClass, on_delete=models.CASCADE)
 
@@ -48,10 +50,11 @@ class TimeSlot(models.Model):
     Model representing time slot of each period
     """
     day = models.CharField(max_length=240)
-    time = models.DateTimeField(auto_now=True)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
 
     def __str__(self):
-        return self.day + ' ' + self.time
+        return self.day
 
 
 class Subject(models.Model):
@@ -75,10 +78,9 @@ class Period(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     subject = models.OneToOneField(Subject, on_delete=models.CASCADE)
     college_class = models.OneToOneField(CollegeClass, on_delete=models.CASCADE)
-    date = models.DateField()
 
     def __str__(self):
-        return self.teacher + '' + self.subject
+        return self.teacher.name + '' + self.subject.name
 
 
 class Attendance(models.Model):
