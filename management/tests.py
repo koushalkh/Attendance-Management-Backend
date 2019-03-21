@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import Student, CollegeClass
+from .managers import StudentManager
 
 
 # Create your tests here.
@@ -22,3 +23,10 @@ class StudentTestCase(TestCase):
     def test_get_all_students(self):
         num_of_students = len(Student.objects.all())
         self.assertEquals(num_of_students, 2)
+
+    def test_get_student_by_usn(self):
+        # student = Student.objects.get(usn="1RN15CS098")
+        student = StudentManager.get_student_by_usn("1RN15CS098")
+        self.assertEquals(student.class_name.name, "8A")
+
+
