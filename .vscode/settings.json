@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "/home/chetan_b/.local/share/virtualenvs/Attendance-Management-Backend-OajXwbT2/bin/python"
+    "python.pythonPath": "/usr/bin/python3.6",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }
