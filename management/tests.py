@@ -1,6 +1,6 @@
 from django.test import TestCase
-from .models import Student, CollegeClass
-from .managers import StudentManager
+from .models import Student, CollegeClass, Subject, StudentSubject
+from .managers import StudentManager, StudentSubjectManager
 
 
 # Create your tests here.
@@ -30,3 +30,22 @@ class StudentTestCase(TestCase):
         self.assertEquals(student.class_name.name, "8A")
 
 
+class SubjectTestCase(TestCase):
+    """
+    Test cases for subject-student model
+    """
+
+    def setUp(self):
+        class_name = CollegeClass.objects.create(name="8A")
+        stud = Student.objects.create(name="john", usn="1rn15cs037", email="abc@gmail.com", class_name=class_name)
+        s2 = Subject.objects.create(name="Algorithms", subject_id="15cs083")
+        s3 = Subject.objects.create(name="ML", subject_id="15cs084")
+        StudentSubject.objects.create(subject=s2, student=stud)
+        StudentSubject.objects.create(subject=s3, student=stud)
+
+    def test_get_subjects_by_student(self):
+        subjects = StudentSubjectManager.get_all_subjects_by_student("1rn15cs037")
+        self.assertEquals(len(subjects), 2)
+
+# class AttendanceTestCase(TestCase):
+#

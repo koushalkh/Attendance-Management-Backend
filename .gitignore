@@ -74,6 +74,7 @@ coverage.xml
 *.mo
 
 # Django stuff:
+migrations/
 
 # Flask stuff:
 instance/
@@ -286,3 +287,5 @@ pip-selfcheck.json
 .history
 
 # End of https://www.gitignore.io/api/venv,django,python,pycharm,visualstudiocode
+
+.vscode/

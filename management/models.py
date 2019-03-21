@@ -76,8 +76,8 @@ class Period(models.Model):
 
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    subject = models.OneToOneField(Subject, on_delete=models.CASCADE)
-    college_class = models.OneToOneField(CollegeClass, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    college_class = models.ForeignKey(CollegeClass, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.teacher.name + '' + self.subject.name
@@ -108,6 +108,8 @@ class StudentSubject(models.Model):
 
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    studentsubject=models.Manager
 
     def __str__(self):
         return self.subject.name + ' ' + self.student.name
