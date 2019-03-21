@@ -1,7 +1,7 @@
 """
-Manages all queries related to student model
+Manages all queries related to database model
 """
-from ..models import Student
+from management.models import Student
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -18,4 +18,5 @@ class StudentManager(models.Manager):
             return Student.objects.all()
         except ObjectDoesNotExist:
             return None
+
 
