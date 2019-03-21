@@ -45,7 +45,7 @@ class TimeSlot(models.Model):
     """
     Model representing time slot of each period
     """
-    day = models.CharField()
+    day = models.CharField(max_length=240)
     time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -57,7 +57,7 @@ class Subject(models.Model):
     Model representing Subject entity
     """
 
-    name = models.CharField()
+    name = models.CharField(max_length=240)
     subject_id = models.CharField()
 
     def __str__(self):
