@@ -35,3 +35,8 @@ def login(request):
     token, _ = Token.objects.get_or_create(user=user)
     # send token credentials if the user is logged in
     return Response({'token': token.key}, status=HTTP_200_OK)
+
+
+# @csrf_exempt
+# @api_view(["GET"])
+# def subjects_taken_by_student(request)
