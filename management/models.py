@@ -26,6 +26,8 @@ class Student(models.Model):
     email = models.EmailField()
     class_name = models.ForeignKey(CollegeClass, on_delete=models.CASCADE)
 
+    student = models.Manager
+
     def __str__(self):
         return self.name
 
@@ -58,7 +60,7 @@ class Subject(models.Model):
     """
 
     name = models.CharField(max_length=240)
-    subject_id = models.CharField()
+    subject_id = models.CharField(max_length=240)
 
     def __str__(self):
         return self.name
