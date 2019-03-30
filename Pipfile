@@ -12,6 +12,9 @@ pylint = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+cv2 = "*"
+opencv-python = "*"
+python3-opencv = "*"
 
 [requires]
 python_version = "3.6"
