@@ -4,7 +4,8 @@ import sqlite3
 import dlib
 import os
 from create_person_group import create_group
-from models import Person                                                                       # for creating folders
+from create_person import create_person
+from .models import Person                                                                       # for creating folders
 
 cap = cv2.VideoCapture(0)
 detector = dlib.get_frontal_face_detector()
@@ -17,24 +18,11 @@ def insertOrUpdate(usn) :                                            # this func
     if person == None:
         Person.objects.create(usn = usn)
     print(person)
-    # connect = sqlite3.connect("Face-DataBase")                                  # connecting to the database
-    # cmd = "SELECT * FROM Students WHERE ID = " + Id                             # selecting the row of an id into consideration
-    # cursor = connect.execute(cmd)
-    # isRecordExist = 0
-    # for row in cursor:                                                          # checking wheather the id exist or not
-    #     isRecordExist = 1
-    # if isRecordExist == 1:                                                      # updating name and roll no
-    #     connect.execute("UPDATE Students SET Name = ? WHERE ID = ?",(Name, Id))
-    #     connect.execute("UPDATE Students SET Roll = ? WHERE ID = ?",(roll, Id))
-    # else:
-    # 	params = (Id, Name, roll)                                               # insering a new student data
-    # 	connect.execute("INSERT INTO Students(ID, Name, Roll) VALUES(?, ?, ?)", params)
-    # connect.commit()                                                            # commiting into the database
-    # connect.close()                                                             # closing the connection
+
 
 #Chane this such that USN is obtained from front end
 usn = input("Enter student's USN :").upper()
-insertOrUpdate(usn)                                                  # calling the sqlite3 database
+insertOrUpdate(usn)
 
 
 folderName = usn                                                        # creating the person or user folder
@@ -62,4 +50,5 @@ cap.release()                                                                   
 cv2.destroyAllWindows()                                                         # Closing all the opened windows
 
 create_group()
+create_person(usn)
 
