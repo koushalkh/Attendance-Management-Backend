@@ -2,8 +2,8 @@
 Register models in management app
 """
 from django.contrib import admin
-from .models import Teacher, Period, TimeSlot, \
-    Subject, StudentSubject, Student, CollegeClass, Attendance
+from .models import Student, CollegeClass, Teacher, TimeSlot \
+    , Subject, StudentSubject, Period, Attendance
 
 # Register your models here.
 
