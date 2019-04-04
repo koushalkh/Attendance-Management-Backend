@@ -13,6 +13,7 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 from rest_framework.response import Response
+from .managers import StudentSubjectManager
 
 
 # Create your views here.
@@ -37,6 +38,9 @@ def login(request):
     return Response({'token': token.key}, status=HTTP_200_OK)
 
 
-# @csrf_exempt
-# @api_view(["GET"])
-# def subjects_taken_by_student(request)
+@csrf_exempt
+@api_view(["POST"])
+def subjects(request):
+    print(StudentSubjectManager.get_all_subjects_by_student(request.data['subjectId']))
+    # serializer=
+    return Response("done", status=HTTP_200_OK)
