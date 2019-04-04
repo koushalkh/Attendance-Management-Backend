@@ -13,7 +13,8 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 from rest_framework.response import Response
-# from .managers import
+# from .managers import StudentSubjectManager
+
 
 # Create your views here.
 
@@ -38,6 +39,5 @@ def login(request):
 
 
 # @api_view(["GET"])
-# def getSubjects(request):
-#     try:
-
+# def getSubjects(request, usn):
+#     print(StudentSubjectManager.get_all_subjects_by_student(usn))
