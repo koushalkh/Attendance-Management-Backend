@@ -90,6 +90,7 @@ class Attendance(models.Model):
 
     period = models.OneToOneField(Period, on_delete=models.CASCADE)
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    attendance = models.Manager
 
     def __str__(self):
         return self.student.name
@@ -109,7 +110,7 @@ class StudentSubject(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
-    studentsubject=models.Manager
+    studentsubject = models.Manager
 
     def __str__(self):
         return self.subject.name + ' ' + self.student.name
