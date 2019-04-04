@@ -40,6 +40,7 @@ class Teacher(models.Model):
     """
     name = models.CharField(max_length=240)
     email = models.EmailField()
+    teacher = models.Manager
 
     def __str__(self):
         return self.name

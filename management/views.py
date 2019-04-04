@@ -15,9 +15,10 @@ from rest_framework.status import (
 
 )
 from rest_framework.response import Response
-from .managers import StudentSubjectManager, StudentManager, AttendanceManager
+from .managers import StudentSubjectManager, StudentManager, AttendanceManager, \
+    TeacherManager
 from .serializers import StudentSubjectSerializer, SubjectSerializer, StudentSerializer, \
-    AttendanceSerializer
+    AttendanceSerializer, TeacherSerializer
 
 
 # Create your views here.
@@ -38,8 +39,17 @@ def login(request):
         return Response({'error': 'Invalid Credentials'},
                         status=HTTP_400_BAD_REQUEST)
     token, _ = Token.objects.get_or_create(user=user)
+    # Send the type of person
+    person_type = "management"
+    # Check if the person belongs to student group
+    check_for_student = StudentManager.get_student_by_name(username)
+    if check_for_student is not None:
+        person_type = "student"
+    check_for_teacher = TeacherManager.get_teacher_by_name(username)
+    if check_for_teacher is not None:
+        person_type = "teacher"
     # send token credentials if the user is logged in
-    return Response({'token': token.key}, status=HTTP_200_OK)
+    return Response({'token': token.key, 'type': person_type}, status=HTTP_200_OK)
 
 
 @csrf_exempt
@@ -63,6 +73,11 @@ def subjects(request):
 @csrf_exempt
 @api_view(["POST"])
 def student(request):
+    """
+    API endpoint to fetch student details by USN
+    :param request:
+    :return:
+    """
     usn = request.data['usn']
     requested_student = StudentManager.get_student_by_usn(usn)
     if requested_student is None:
@@ -74,9 +89,30 @@ def student(request):
 @csrf_exempt
 @api_view(["POST"])
 def attendance(request):
+    """
+    API endpoint to fetch attendance of given student
+    :param request:
+    :return:
+    """
     usn = request.data['usn']
     requested_student = StudentManager.get_student_by_usn(usn)
     requested_attendance = AttendanceManager.get_attendance_of_student(requested_student)
     print(requested_attendance)
     serializer = AttendanceSerializer(requested_attendance, many=True)
+    return Response(serializer.data, status=HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def teacher(request):
+    """
+    API endpoint to fetch teacher details
+    :param request:
+    :return:
+    """
+    name = request.data['name']
+    requested_teacher = TeacherManager.get_teacher_by_name(name)
+    if requested_teacher is None:
+        return Response("Teacher not found", status=HTTP_400_BAD_REQUEST)
+    serializer = TeacherSerializer(requested_teacher)
     return Response(serializer.data, status=HTTP_200_OK)

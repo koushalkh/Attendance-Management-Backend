@@ -1,7 +1,8 @@
 """
 Manages all queries related to database model
 """
-from management.models import Student, CollegeClass, StudentSubject, Attendance
+from management.models import Student, CollegeClass, StudentSubject, Attendance, \
+    Teacher
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
@@ -49,6 +50,19 @@ class StudentManager(models.Manager):
         except IntegrityError:
             return None
 
+    @classmethod
+    def get_student_by_name(cls, name):
+        """
+        fetch student details by name
+        :param name:
+        :return:
+        """
+        try:
+            student = Student.objects.get(name=name)
+            return student
+        except ObjectDoesNotExist:
+            return None
+
 
 class StudentSubjectManager(models.Manager):
     """
@@ -72,7 +86,7 @@ class StudentSubjectManager(models.Manager):
 
 class AttendanceManager(models.Manager):
     """
-    This model handles all queries for Attendance model
+    This manager class handles all queries for Attendance model
     """
 
     @classmethod
@@ -85,5 +99,24 @@ class AttendanceManager(models.Manager):
         try:
             attendance = list(Attendance.objects.filter(student=student))
             return attendance
+        except ObjectDoesNotExist:
+            return None
+
+
+class TeacherManager(models.Manager):
+    """
+    This manager class handles all queries for Teacher model
+    """
+
+    @classmethod
+    def get_teacher_by_name(cls, name):
+        """
+        get teacher object by name
+        :param name:
+        :return:
+        """
+        try:
+            teacher = Teacher.objects.get(name=name)
+            return teacher
         except ObjectDoesNotExist:
             return None
