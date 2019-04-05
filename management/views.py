@@ -49,6 +49,7 @@ def login(request):
     if check_for_teacher is not None:
         person_type = "teacher"
     # send token credentials if the user is logged in
+    print({'token': token.key, 'type': person_type})
     return Response({'token': token.key, 'type': person_type}, status=HTTP_200_OK)
 
 
