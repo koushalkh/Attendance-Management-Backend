@@ -9,7 +9,6 @@
 __pycache__/
 local_settings.py
 media
-Pipfile
 Pipfile.lock
 .idea/
 
@@ -73,8 +72,6 @@ coverage.xml
 *.mo
 
 # Django stuff:
-migrations/
-!migrations/__init__.py
 
 # Flask stuff:
 instance/

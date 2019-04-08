@@ -40,6 +40,7 @@ class Teacher(models.Model):
     """
     name = models.CharField(max_length=240)
     email = models.EmailField()
+    teacher = models.Manager
 
     def __str__(self):
         return self.name
@@ -50,11 +51,11 @@ class TimeSlot(models.Model):
     Model representing time slot of each period
     """
     day = models.CharField(max_length=240)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
 
     def __str__(self):
-        return self.day
+        return self.day + ' ' + str(self.start_time)
 
 
 class Subject(models.Model):
@@ -90,6 +91,7 @@ class Attendance(models.Model):
 
     period = models.OneToOneField(Period, on_delete=models.CASCADE)
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    present_date = models.DateField(blank=True, null=True)
     attendance = models.Manager
 
     def __str__(self):
@@ -114,3 +116,14 @@ class StudentSubject(models.Model):
 
     def __str__(self):
         return self.subject.name + ' ' + self.student.name
+
+
+class PeriodTracker(models.Model):
+    """
+    Model for tracking periods
+    """
+    period = models.OneToOneField(Period, on_delete=models.CASCADE)
+    taken = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.period.teacher) + '' + str(self.period.subject)

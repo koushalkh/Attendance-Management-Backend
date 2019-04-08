@@ -1,10 +1,12 @@
 """
 Manages all queries related to database model
 """
-from management.models import Student, CollegeClass, StudentSubject, Attendance
+from management.models import Student, CollegeClass, StudentSubject, Attendance, \
+    Teacher, Period, PeriodTracker
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
+import datetime
 
 
 class StudentManager(models.Manager):
@@ -49,6 +51,19 @@ class StudentManager(models.Manager):
         except IntegrityError:
             return None
 
+    @classmethod
+    def get_student_by_name(cls, name):
+        """
+        fetch student details by name
+        :param name:
+        :return:
+        """
+        try:
+            student = Student.objects.get(name=name)
+            return student
+        except ObjectDoesNotExist:
+            return None
+
 
 class StudentSubjectManager(models.Manager):
     """
@@ -72,7 +87,7 @@ class StudentSubjectManager(models.Manager):
 
 class AttendanceManager(models.Manager):
     """
-    This model handles all queries for Attendance model
+    This manager class handles all queries for Attendance model
     """
 
     @classmethod
@@ -87,3 +102,93 @@ class AttendanceManager(models.Manager):
             return attendance
         except ObjectDoesNotExist:
             return None
+
+
+class TeacherManager(models.Manager):
+    """
+    This manager class handles all queries for Teacher model
+    """
+
+    @classmethod
+    def get_teacher_by_name(cls, name):
+        """
+        get teacher object by name
+        :param name:
+        :return:
+        """
+        try:
+            teacher = Teacher.objects.get(name=name)
+            return teacher
+        except ObjectDoesNotExist:
+            return None
+
+    @classmethod
+    def fetch_daily_periods(cls, name):
+        """
+        fetch periods taken by a teacher on a given day
+        :param name:
+        :return:
+        """
+        current_date = datetime.date.today()
+        try:
+            requested_teacher = Teacher.objects.get(name=name)
+        except ObjectDoesNotExist:
+            return None
+        try:
+            periods = Period.objects.filter(teacher=requested_teacher)
+        except ObjectDoesNotExist:
+            return None
+        # filter for periods on the current day
+        daily_periods = []
+        for period in periods:
+            if period.time_slot.start_time.date() == current_date:
+                daily_periods.append(period)
+        return daily_periods
+
+
+class PeriodTrackerManager(models.Manager):
+    """
+    This manager class handles all the queries for PeriodTracker
+    """
+
+    @classmethod
+    def past(cls, name):
+        """
+        fetch past classes taken by teacher
+        :param name:
+        :return:
+        """
+        daily_periods = TeacherManager.fetch_daily_periods(name)
+        if daily_periods is None:
+            return None
+        past_periods = []
+        for period in daily_periods:
+            try:
+                period_tracker = PeriodTracker.objects.get(period=period)
+            except ObjectDoesNotExist:
+                return None
+            if period_tracker is not None and period_tracker.taken is True:
+                past_periods.append(period)
+        return past_periods
+
+    @classmethod
+    def upcoming(cls, name):
+        """
+        fetch upcoming classes for a teacher
+        :param name:
+        :return:
+        """
+        daily_periods = TeacherManager.fetch_daily_periods(name)
+        print(daily_periods)
+        if daily_periods is None:
+            return None
+        upcoming_periods = []
+        for period in daily_periods:
+            try:
+                period_tracker = PeriodTracker.objects.get(period=period)
+            except ObjectDoesNotExist:
+                return None
+            if period_tracker is not None and period_tracker.taken is False:
+                upcoming_periods.append(period)
+        return upcoming_periods
+

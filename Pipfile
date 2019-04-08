@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+autopep8 = "*"
 
 [packages]
 django = "*"
@@ -12,6 +13,7 @@ pylint = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.6"
