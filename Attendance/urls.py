@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from management import urls
+from training.views import training
+from detection.views import detecting
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(urls))
+    path('api/', include(urls)),
+    path('train/', training),
+    path('detect/', detecting)
 ]

@@ -1,5 +1,5 @@
 import cognitive_face as CF
-from global_variables import personGroupId, Key
+from .global_variables import personGroupId, Key
 import sys
 
 def create_group():

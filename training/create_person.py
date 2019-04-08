@@ -1,6 +1,6 @@
 import sys
 import cognitive_face as CF
-from global_variables import personGroupId, Key
+from .global_variables import personGroupId, Key
 import sqlite3
 from .models import Person
 
