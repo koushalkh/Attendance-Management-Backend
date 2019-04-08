@@ -16,9 +16,9 @@ from rest_framework.status import (
 )
 from rest_framework.response import Response
 from .managers import StudentSubjectManager, StudentManager, AttendanceManager, \
-    TeacherManager
+    TeacherManager, PeriodTrackerManager
 from .serializers import StudentSubjectSerializer, SubjectSerializer, StudentSerializer, \
-    AttendanceSerializer, TeacherSerializer
+    AttendanceSerializer, TeacherSerializer, PeriodSerializer
 
 
 # Create your views here.
@@ -115,4 +115,58 @@ def teacher(request):
     if requested_teacher is None:
         return Response("Teacher not found", status=HTTP_400_BAD_REQUEST)
     serializer = TeacherSerializer(requested_teacher)
+    return Response(serializer.data, status=HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def daily_periods(request):
+    """
+    API endpoint to fetch daily class periods of a requested teacher
+    :param request:
+    :return:
+    """
+    name = request.data['name']
+    periods = TeacherManager.fetch_daily_periods(name)
+    if periods is None:
+        return Response("Invalid details", status=HTTP_400_BAD_REQUEST)
+    serializer = PeriodSerializer(periods, many=True)
+    return Response(serializer.data, status=HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def upcoming_periods(request):
+    """
+    API end point to fetch upcoming periods on current day
+    :param request:
+    :return:
+    """
+    name = request.data['name']
+    requested_teacher = TeacherManager.get_teacher_by_name(name)
+    if requested_teacher is None:
+        return Response("Invalid name", status=HTTP_400_BAD_REQUEST)
+    upcoming = PeriodTrackerManager.upcoming(name)
+    if upcoming is None:
+        return Response("No upcoming periods", status=HTTP_400_BAD_REQUEST)
+    serializer = PeriodSerializer(upcoming, many=True)
+    return Response(serializer.data, status=HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def past_periods(request):
+    """
+    API end point to fetch past period taken by teacher on the current day
+    :param request:
+    :return:
+    """
+    name = request.data['name']
+    requested_teacher = TeacherManager.get_teacher_by_name(name)
+    if requested_teacher is None:
+        return Response("Invalid name", status=HTTP_400_BAD_REQUEST)
+    past = PeriodTrackerManager.past(name)
+    if past is None:
+        return Response("No periods taken", status=HTTP_400_BAD_REQUEST)
+    serializer = PeriodSerializer(past, many=True)
     return Response(serializer.data, status=HTTP_200_OK)

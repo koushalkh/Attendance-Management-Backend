@@ -55,7 +55,7 @@ class TimeSlot(models.Model):
     end_time = models.DateTimeField()
 
     def __str__(self):
-        return self.day
+        return self.day + ' ' + str(self.start_time)
 
 
 class Subject(models.Model):
@@ -115,3 +115,14 @@ class StudentSubject(models.Model):
 
     def __str__(self):
         return self.subject.name + ' ' + self.student.name
+
+
+class PeriodTracker(models.Model):
+    """
+    Model for tracking periods
+    """
+    period = models.OneToOneField(Period, on_delete=models.CASCADE)
+    taken = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.period.teacher) + '' + str(self.period.subject)
