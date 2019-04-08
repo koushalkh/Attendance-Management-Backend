@@ -170,6 +170,8 @@ class PeriodTrackerManager(models.Manager):
                 period_tracker = PeriodTracker.objects.get(period=period)
                 if period_tracker is not None and period_tracker.taken is True:
                     past_periods.append(period)
+            except ObjectDoesNotExist:
+                continue
         return past_periods
 
     @classmethod
@@ -191,8 +193,6 @@ class PeriodTrackerManager(models.Manager):
                 print(period_tracker.taken)
                 if period_tracker.taken is False:
                     upcoming_periods.append(period)
-                # else
-
             except ObjectDoesNotExist:
                 continue
         return upcoming_periods
