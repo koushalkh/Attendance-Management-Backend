@@ -191,3 +191,4 @@ class PeriodTrackerManager(models.Manager):
             if period_tracker is not None and period_tracker.taken is False:
                 upcoming_periods.append(period)
         return upcoming_periods
+
