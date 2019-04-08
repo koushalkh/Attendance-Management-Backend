@@ -8,6 +8,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 import datetime
 
+week_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
 
 class StudentManager(models.Manager):
     """
@@ -129,7 +131,8 @@ class TeacherManager(models.Manager):
         :param name:
         :return:
         """
-        current_date = datetime.date.today()
+        current_date = datetime.date.today().weekday()
+        current_day = week_days[4]
         try:
             requested_teacher = Teacher.objects.get(name=name)
         except ObjectDoesNotExist:
@@ -141,7 +144,7 @@ class TeacherManager(models.Manager):
         # filter for periods on the current day
         daily_periods = []
         for period in periods:
-            if period.time_slot.start_time.date() == current_date:
+            if period.time_slot.day == current_day:
                 daily_periods.append(period)
         return daily_periods
 
@@ -165,10 +168,8 @@ class PeriodTrackerManager(models.Manager):
         for period in daily_periods:
             try:
                 period_tracker = PeriodTracker.objects.get(period=period)
-            except ObjectDoesNotExist:
-                return None
-            if period_tracker is not None and period_tracker.taken is True:
-                past_periods.append(period)
+                if period_tracker is not None and period_tracker.taken is True:
+                    past_periods.append(period)
         return past_periods
 
     @classmethod
@@ -186,9 +187,12 @@ class PeriodTrackerManager(models.Manager):
         for period in daily_periods:
             try:
                 period_tracker = PeriodTracker.objects.get(period=period)
-            except ObjectDoesNotExist:
-                return None
-            if period_tracker is not None and period_tracker.taken is False:
-                upcoming_periods.append(period)
-        return upcoming_periods
+                print("hello")
+                print(period_tracker.taken)
+                if period_tracker.taken is False:
+                    upcoming_periods.append(period)
+                # else
 
+            except ObjectDoesNotExist:
+                continue
+        return upcoming_periods
