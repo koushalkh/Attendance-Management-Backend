@@ -14,6 +14,8 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 django-cors-headers = "*"
+django-webpush = "*"
+django-reset-migrations = "*"
 
 [requires]
 python_version = "3.6"

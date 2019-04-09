@@ -38,8 +38,16 @@ INSTALLED_APPS = [
     'management',
     'rest_framework',
     'rest_framework.authtoken',
-     'corsheaders'
+    'corsheaders',
+    'webpush',
+    'reset_migrations'
 ]
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BPQoCGpr8QxGiNWn21MQhauM8Z8yedGFdK51NbvaHuu7tRUCRNpmSnnd8Bd94lFNS4s0cdfnkO9eUwC6fFWf980",
+    "VAPID_PRIVATE_KEY": "pFdFbA3iYuibmY9MIVufAa_v8TSU2mlKiZmZQshtV1M",
+    "VAPID_ADMIN_EMAIL": "chetan.b@hashedin.com"
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
