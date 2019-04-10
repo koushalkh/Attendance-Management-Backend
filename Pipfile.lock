@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "07d700b606464aa91ca3d0cd1192f471aa8fae72de366c38cd93f8e77b8c243b"
+            "sha256": "a6db260d0423b5cf0743b9cfc5bb92195b9b258463866415d2784e3f3fe74f81"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -106,7 +106,6 @@
                 "sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163",
                 "sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9"
             ],
-            "index": "pypi",
             "version": "==0.5.0"
         },
         "django": {
@@ -132,6 +131,14 @@
             ],
             "index": "pypi",
             "version": "==2.1.0"
+        },
+        "django-heroku": {
+            "hashes": [
+                "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762",
+                "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"
+            ],
+            "index": "pypi",
+            "version": "==0.3.1"
         },
         "django-reset-migrations": {
             "hashes": [
@@ -249,7 +256,6 @@
                 "sha256:e1e4fe6e8ab9f9c7d28514d007f623999d2dd6b5b81069dd4f9d30dbdd6f7069",
                 "sha256:e67d60cb1a32f5fd8fcea935cf9efb1d1c26f96203b0ca2ae98c4c40ef8d8eac"
             ],
-            "index": "pypi",
             "version": "==2.8.1"
         },
         "py-vapid": {
@@ -343,7 +349,6 @@
                 "sha256:118ab3e5f815d380171b100b05b76de2a07612f422368a201a9ffdeefb2251c1",
                 "sha256:42133ddd5229eeb6a0c9899496bdbe56c292394bf8666da77deeb27454c0456a"
             ],
-            "index": "pypi",
             "version": "==4.1.2"
         },
         "wrapt": {
