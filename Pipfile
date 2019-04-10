@@ -16,6 +16,10 @@ django-filter = "*"
 django-cors-headers = "*"
 django-webpush = "*"
 django-reset-migrations = "*"
+gunicorn = "*"
+dj-database-url = "*"
+whitenoise = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.6"
