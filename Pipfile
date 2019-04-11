@@ -14,6 +14,7 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 django-cors-headers = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.6"
