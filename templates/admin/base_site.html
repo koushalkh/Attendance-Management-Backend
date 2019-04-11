@@ -1,5 +1,12 @@
 {% extends "admin/base_site.html" %}
-
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <img src="http://www.rnsit.ac.in/images/RNSIT.png" height="60px"/>
+        RNSIT MANAGEMENT
+    </a>
+</h1>
+{% endblock %}
 {% block extrastyle %}
 <style>
   :root {
@@ -61,5 +68,6 @@
     background: var(--primary-color);
     opacity: 0.8;
   }
+
 </style>
 {% endblock %}
