@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'management',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
+     'corsheaders',
+    'training',
+    'reset_migrations',
 ]
 
 MIDDLEWARE = [
