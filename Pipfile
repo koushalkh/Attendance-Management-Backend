@@ -15,6 +15,7 @@ markdown = "*"
 django-filter = "*"
 django-cors-headers = "*"
 opencv-python = "*"
+django-reset-migrations = "*"
 
 [requires]
 python_version = "3.6"

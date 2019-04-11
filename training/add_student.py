@@ -27,7 +27,7 @@ def add_student():
     #Chane this such that USN is obtained from front end
     print("before input")
     #usn = input("Enter student's USN :").upper()
-    usn = "1RN15CS068"
+    usn = "1RN15CS080"
     insertOrUpdate(usn)
 
 
