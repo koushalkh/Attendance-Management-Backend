@@ -288,3 +288,4 @@ pip-selfcheck.json
 .vscode/
 
 training/dataset
+*.jpg

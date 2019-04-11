@@ -89,8 +89,8 @@ class Attendance(models.Model):
     Model for calculating attendance of each student
     """
 
-    period = models.OneToOneField(Period, on_delete=models.CASCADE)
-    student = models.OneToOneField(Student, on_delete=models.CASCADE)
+    period = models.ForeignKey(Period, blank=True, null=True, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, blank=True, null=True, on_delete=models.CASCADE)
     present_date = models.DateField(blank=True, null=True)
     attendance = models.Manager
 
