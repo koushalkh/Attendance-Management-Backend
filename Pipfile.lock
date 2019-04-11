@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9346a97820e45a400f36283b8cb67c12fc2997338c020987c7507caa2852e572"
+            "sha256": "5bcf5d997b0ecc264040aa64d417fb41f9bdcd5a95095a35152403a64484a23e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -76,6 +76,14 @@
                 "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"
             ],
             "version": "==3.0.4"
+        },
+        "cognitive-face": {
+            "hashes": [
+                "sha256:408cca9fc551cbfc632b38c2af2804486a1d581cd67956b61504d41ebe070f72",
+                "sha256:84209d1cf6a28c4676e734569254c1b3924df008483f3b376befd1c5939f4bf2"
+            ],
+            "index": "pypi",
+            "version": "==1.4.2"
         },
         "cryptography": {
             "hashes": [
@@ -165,6 +173,19 @@
             "index": "pypi",
             "version": "==3.9.2"
         },
+        "dlib": {
+            "hashes": [
+                "sha256:92587c81b0165e933593f505fdf099dface0d0f8ec874b1d8655fc774598911f"
+            ],
+            "index": "pypi",
+            "version": "==19.17.0"
+        },
+        "et-xmlfile": {
+            "hashes": [
+                "sha256:614d9722d572f6246302c4491846d2c393c199cfa4edc9af593437691683335b"
+            ],
+            "version": "==1.0.1"
+        },
         "gunicorn": {
             "hashes": [
                 "sha256:aa8e0b40b4157b36a5df5e599f45c9c76d6af43845ba3b3b0efe2c70473c2471",
@@ -192,6 +213,13 @@
                 "sha256:268067462aed7eb2a1e237fcb287852f22077de3fb07964e87e00f829eea2d1a"
             ],
             "version": "==4.3.17"
+        },
+        "jdcal": {
+            "hashes": [
+                "sha256:948fb8d079e63b4be7a69dd5f0cd618a0a57e80753de8248fd786a8a20658a07",
+                "sha256:ea0a5067c5f0f50ad4c7bdc80abad3d976604f6fb026b0b3a17a9d84bb9046c9"
+            ],
+            "version": "==1.4"
         },
         "lazy-object-proxy": {
             "hashes": [
@@ -301,6 +329,13 @@
             ],
             "index": "pypi",
             "version": "==4.0.1.24"
+        },
+        "openpyxl": {
+            "hashes": [
+                "sha256:1d2af392cef8c8227bd2ac3ebe3a28b25aba74fd4fa473ce106065f0b73bfe2e"
+            ],
+            "index": "pypi",
+            "version": "==2.6.2"
         },
         "psycopg2": {
             "hashes": [

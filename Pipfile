@@ -19,6 +19,9 @@ django-reset-migrations = "*"
 gunicorn = "*"
 django-heroku = "*"
 opencv-python = "*"
+dlib = "*"
+cognitive-face = "*"
+openpyxl = "*"
 
 [requires]
 python_version = "3.6"
