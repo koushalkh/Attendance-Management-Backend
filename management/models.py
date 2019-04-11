@@ -94,6 +94,12 @@ class Attendance(models.Model):
     present_date = models.DateField(blank=True, null=True)
     attendance = models.Manager
 
+    class Meta:
+        """
+        period and student must be composite key
+        """
+        unique_together = ('period', 'student')
+
     def __str__(self):
         return self.student.name
 
