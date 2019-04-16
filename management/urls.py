@@ -13,5 +13,5 @@ urlpatterns = [
     path('teacher/', teacher),
     path('periods/', daily_periods),
     path('periods/upcoming/', upcoming_periods),
-    path('periods/past/', past_periods)
+    path('periods/past/', past_periods),
 ]

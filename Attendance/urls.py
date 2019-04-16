@@ -18,8 +18,11 @@ from django.urls import path, include
 from management import urls
 from training.views import training
 from detection.views import detecting
+from management.views import add_student_from_excel
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/addStudent/', add_student_from_excel),
     path('api/', include(urls)),
     path('train/', training),
     path('detect/', detecting)

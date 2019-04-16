@@ -21,3 +21,5 @@ admin.site.register(PeriodTracker)
 admin.site.site_header = "RNSIT Management"
 admin.site.site_title = "RNSIT"
 admin.site.index_title = "Welcome to attendance management portal"
+
+# Add functionalty for button on Admin home page

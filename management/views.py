@@ -14,6 +14,8 @@ from rest_framework.status import (
     HTTP_201_CREATED
 
 )
+from django.shortcuts import redirect
+from django.http import HttpResponse
 from rest_framework.response import Response
 from .managers import StudentSubjectManager, StudentManager, AttendanceManager, \
     TeacherManager, PeriodTrackerManager
@@ -171,3 +173,13 @@ def past_periods(request):
         return Response("No periods taken", status=HTTP_400_BAD_REQUEST)
     serializer = PeriodSerializer(past, many=True)
     return Response(serializer.data, status=HTTP_200_OK)
+
+
+def add_student_from_excel(request):
+    """
+    View function to add students from excel sheet
+    :param request:
+    :return:
+    """
+    print("Students added")
+    return redirect('/admin/')
